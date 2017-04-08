@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     sys.c
  * @version  V3.00
- * $Revision: 7 $
- * $Date: 14/07/25 8:56a $
+ * $Revision: 8 $
+ * $Date: 14/12/25 11:26a $
  * @brief    NUC131 series SYS driver source file
  *
  * @note
@@ -74,7 +74,7 @@ uint32_t SYS_GetResetSrc(void)
   * @brief      Check if register lock is set
   * @param      None
   * @retval     0 Write-protection function is disabled.
-  *             1 Write-protection function is enabled.
+  * @retval     1 Write-protection function is enabled.
   * @details    This function check register write-protection bit setting.
   */
 uint32_t SYS_IsRegLocked(void)

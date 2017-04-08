@@ -43,7 +43,7 @@ __vector_table
     DCD     EINT0_IRQHandler            ; External signal interrupt from PB.14 pin                
     DCD     EINT1_IRQHandler            ; External signal interrupt from PB.15 pin                
     DCD     GPAB_IRQHandler             ; GPIO interrupt from PA[15:0]/PB[13:0]     
-    DCD     GPCDEF_IRQHandler          	; GPIO interrupt from PC[15:0]/PD[15:0]/PE[15:0]//PF[3:0]     
+    DCD     GPCDEF_IRQHandler          	; GPIO interrupt from PC[15:0]/PD[15:0]/PE[15:0]//PF[8:0]     
     DCD     Default_Handler             ; Reserved                                 
     DCD     Default_Handler             ; Reserved                                 
     DCD     TMR0_IRQHandler             ; Timer 0 interrupt                                      
@@ -66,9 +66,9 @@ __vector_table
     DCD     BPWM1_IRQHandler            ; BPWM1 interrupt          
     DCD     BRAKE0_IRQHandler           ; BRAKE0 interrupt  
     DCD     BRAKE1_IRQHandler           ; BRAKE1 interrupt
-    DCD     PWRWU_IRQHandler            ; Clock controller interrupt for chip wake up from power-
+    DCD     PWRWU_IRQHandler            ; Clock controller interrupt for chip wake up from power-down state
     DCD     ADC_IRQHandler              ; ADC interrupt                                          
-    DCD     Default_Handler             ; Reserved
+    DCD     CKD_IRQHandler              ; Clock detection interrupt
     DCD     RTC_IRQHandler              ; Real time clock interrupt                              
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -134,6 +134,7 @@ Reset_Handler
     PUBWEAK BRAKE1_IRQHandler
     PUBWEAK PWRWU_IRQHandler  
     PUBWEAK ADC_IRQHandler    
+    PUBWEAK CKD_IRQHandler      
     PUBWEAK RTC_IRQHandler  
     SECTION .text:CODE:REORDER(2)
 HardFault_Handler 
@@ -169,6 +170,7 @@ BRAKE0_IRQHandler
 BRAKE1_IRQHandler
 PWRWU_IRQHandler
 ADC_IRQHandler    
+CKD_IRQHandler
 RTC_IRQHandler    
 Default_Handler          
     B Default_Handler         

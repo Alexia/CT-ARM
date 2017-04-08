@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     spi.c
  * @version  V3.00
- * $Revision: 5 $
- * $Date: 7/22/14 5:32p $
+ * $Revision: 7 $
+ * $Date: 15/01/07 4:20p $
  * @brief    NUC131 series SPI driver source file
  *
  * @note
@@ -33,11 +33,14 @@
   * @details By default, the SPI transfer sequence is MSB first and the automatic slave selection function is disabled.
   *          In Slave mode, the u32BusClock parameter is useless and the SPI clock divider setting will be 0.
   *          The actual clock rate may be different from the target SPI clock rate.
-  *          For example, if the SPI source clock rate is 12MHz and the target SPI bus clock rate is 7MHz, the
-  *          actual SPI clock rate will be 6MHz.
+  *          For example, if the SPI source clock rate is 12 MHz and the target SPI bus clock rate is 7 MHz, the
+  *          actual SPI clock rate will be 6 MHz.
   * @note   If u32BusClock = 0, DIVIDER setting will be set to the maximum value.
-  * @note   If u32BusClock >= system clock frequency, SPI peripheral clock source will be set to HCLK and DIVIDER will be set to 0.
-  * @note   In Slave mode, the SPI peripheral clock rate will be set to equal system clock rate.
+  * @note   If u32BusClock >= system clock frequency, SPI peripheral clock source setting in CLKSEL1 register will be set to select
+  *         HCLK. The DIVIDER (SPI_DIVIDER[7:0]) will be set to 0.
+  * @note   In Slave mode, the SPI peripheral clock rate will be set to equal system clock rate. If the SPI peripheral clock source
+  *         is PLL before calling this function, the SPI peripheral clock source setting in CLKSEL1 register will be changed to select
+  *         HCLK as the source. The DIVIDER (SPI_DIVIDER[7:0]) will be set to 0 as well.
   */
 uint32_t SPI_Open(SPI_T *spi,
                   uint32_t u32MasterSlave,
@@ -76,7 +79,7 @@ uint32_t SPI_Open(SPI_T *spi,
 
             /* Set DIVIDER = 0 */
             spi->DIVIDER = 0;
-            /* Return slave peripheral clock rate */
+            /* Return master peripheral clock rate */
             return u32HCLKFreq;
         }
         else if(u32BusClock >= u32ClkSrc)
@@ -138,15 +141,13 @@ uint32_t SPI_Open(SPI_T *spi,
   * @brief  Disable SPI controller.
   * @param[in]  spi The pointer of the specified SPI module.
   * @return None
-  * @details This function will reset SPI controller and disable SPI peripheral clock.
+  * @details This function will reset SPI controller.
   */
 void SPI_Close(SPI_T *spi)
 {
     /* Reset SPI */
     SYS->IPRSTC2 |= SYS_IPRSTC2_SPI0_RST_Msk;
     SYS->IPRSTC2 &= ~SYS_IPRSTC2_SPI0_RST_Msk;
-    /* Disable SPI clock */
-    CLK->APBCLK &= ~CLK_APBCLK_SPI0_EN_Msk;
 }
 
 /**
@@ -204,10 +205,11 @@ void SPI_EnableAutoSS(SPI_T *spi, uint32_t u32SSPinMask, uint32_t u32ActiveLevel
   * @param[in]  u32BusClock The expected frequency of SPI bus clock in Hz.
   * @return Actual frequency of SPI bus clock.
   * @details This function is only available in Master mode. The actual clock rate may be different from the target SPI bus clock rate.
-  *          For example, if the SPI source clock rate is 12MHz and the target SPI bus clock rate is 7MHz, the actual SPI bus clock
-  *          rate will be 6MHz.
+  *          For example, if the SPI source clock rate is 12 MHz and the target SPI bus clock rate is 7 MHz, the actual SPI bus clock
+  *          rate will be 6 MHz.
   * @note   If u32BusClock = 0, DIVIDER setting will be set to the maximum value.
-  * @note   If u32BusClock >= system clock frequency, SPI peripheral clock source will be set to HCLK and DIVIDER will be set to 0.
+  * @note   If u32BusClock >= system clock frequency, SPI peripheral clock source setting in CLKSEL1 register will be set to select
+  *         HCLK. The DIVIDER (SPI_DIVIDER[7:0]) will be set to 0.
   */
 uint32_t SPI_SetBusClock(SPI_T *spi, uint32_t u32BusClock)
 {
@@ -231,7 +233,7 @@ uint32_t SPI_SetBusClock(SPI_T *spi, uint32_t u32BusClock)
         CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_SPI0_S_Msk)) | CLK_CLKSEL1_SPI0_S_HCLK;
         /* Set DIVIDER = 0 */
         spi->DIVIDER = 0;
-        /* Return slave peripheral clock rate */
+        /* Return master peripheral clock rate */
         return u32HCLKFreq;
     }
     else if(u32BusClock >= u32ClkSrc)
@@ -283,9 +285,9 @@ uint32_t SPI_SetBusClock(SPI_T *spi, uint32_t u32BusClock)
   */
 void SPI_EnableFIFO(SPI_T *spi, uint32_t u32TxThreshold, uint32_t u32RxThreshold)
 {
-    spi->FIFO_CTL = (spi->FIFO_CTL & ~(SPI_FIFO_CTL_TX_THRESHOLD_Msk | SPI_FIFO_CTL_RX_THRESHOLD_Msk) |
-                     (u32TxThreshold << SPI_FIFO_CTL_TX_THRESHOLD_Pos) |
-                     (u32RxThreshold << SPI_FIFO_CTL_RX_THRESHOLD_Pos));
+    spi->FIFO_CTL = (spi->FIFO_CTL & ~(SPI_FIFO_CTL_TX_THRESHOLD_Msk | SPI_FIFO_CTL_RX_THRESHOLD_Msk)) |
+                    (u32TxThreshold << SPI_FIFO_CTL_TX_THRESHOLD_Pos) |
+                    (u32RxThreshold << SPI_FIFO_CTL_RX_THRESHOLD_Pos);
 
     spi->CNTRL |= SPI_CNTRL_FIFO_Msk;
 }

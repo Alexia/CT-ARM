@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     adc.c
  * @version  V3.00
- * $Revision: 6 $
- * $Date: 7/24/14 9:14a $
+ * $Revision: 7 $
+ * $Date: 1/08/15 12:01p $
  * @brief    NUC131 series ADC driver source file
  *
  * @note
@@ -333,7 +333,8 @@ int32_t CAN_SetRxMsgObj(CAN_T  *tCAN, uint8_t u8MsgObj, uint8_t u8idType, uint32
         tCAN->IF[u8MsgIfNum].ARB2 = CAN_IF_ARB2_MSGVAL_Msk | CAN_IF_ARB2_XTD_Msk | (u32id & 0x1FFF0000) >> 16;
     }
 
-    tCAN->IF[u8MsgIfNum].MCON |= CAN_IF_MCON_UMASK_Msk | CAN_IF_MCON_RXIE_Msk;
+    //tCAN->IF[u8MsgIfNum].MCON |= CAN_IF_MCON_UMASK_Msk | CAN_IF_MCON_RXIE_Msk;
+    tCAN->IF[u8MsgIfNum].MCON = CAN_IF_MCON_UMASK_Msk | CAN_IF_MCON_RXIE_Msk;
     if(u8singleOrFifoLast)
         tCAN->IF[u8MsgIfNum].MCON |= CAN_IF_MCON_EOB_Msk;
     else

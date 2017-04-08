@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     UART.h
  * @version  V3.0
- * $Revision: 12 $
- * $Date: 14/11/07 11:17a $
+ * $Revision: 14 $
+ * $Date: 15/01/16 1:46p $
  * @brief    NUC131 Series UART Interface Controller Driver Header File
  *
  * @note
@@ -30,6 +30,17 @@ extern "C"
 /** @addtogroup NUC131_UART_EXPORTED_CONSTANTS UART Exported Constants
   @{
 */
+
+/*---------------------------------------------------------------------------------------------------------*/
+/* UART FIFO size constants definitions                                                                    */
+/*---------------------------------------------------------------------------------------------------------*/
+
+#define UART0_FIFO_SIZE 16 /*!< UART0 supports separated receive/transmit 16/16 bytes entry FIFO */
+#define UART1_FIFO_SIZE 16 /*!< UART1 supports separated receive/transmit 16/16 bytes entry FIFO */
+#define UART2_FIFO_SIZE 16 /*!< UART2 supports separated receive/transmit 16/16 bytes entry FIFO */
+#define UART3_FIFO_SIZE 1  /*!< UART3 supports separated receive/transmit 1/1 byte buffer */
+#define UART4_FIFO_SIZE 1  /*!< UART4 supports separated receive/transmit 1/1 byte buffer */
+#define UART5_FIFO_SIZE 1  /*!< UART5 supports separated receive/transmit 1/1 byte buffer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* UA_FCR constants definitions                                                                            */
@@ -286,7 +297,7 @@ extern "C"
  *
  *    @param[in]    uart        The pointer of the specified UART module.
  *    @param[in]    u32eIntSel  Interrupt type select
- *                              - UART_IER_AERIEN_Msk       : Auto baud rate interrupt 
+ *                              - UART_IER_AERIEN_Msk       : Auto baud rate interrupt
  *                              - UART_IER_WKDATIEN_Msk     : Data wakeup interrupt
  *                              - UART_IER_LIN_IEN_Msk      : Lin bus interrupt
  *                              - UART_IER_WKCTSIEN_Msk     : CTS wakeup interrupt
@@ -309,7 +320,7 @@ extern "C"
  *
  *    @param[in]    uart        The pointer of the specified UART module.
  *    @param[in]    u32eIntSel  Interrupt type select
- *                              - UART_IER_AERIEN_Msk       : Auto baud rate interrupt 
+ *                              - UART_IER_AERIEN_Msk       : Auto baud rate interrupt
  *                              - UART_IER_WKDATIEN_Msk     : Data wakeup interrupt
  *                              - UART_IER_LIN_IEN_Msk      : Lin bus interrupt
  *                              - UART_IER_WKCTSIEN_Msk     : CTS wakeup interrupt

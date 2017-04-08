@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     timer.h
  * @version  V3.00
- * $Revision: 3 $
- * $Date: 14/07/22 5:47p $
+ * $Revision: 4 $
+ * $Date: 15/01/16 3:21p $
  * @brief    NUC131 series Timer driver header file
  *
  * @note
@@ -59,9 +59,9 @@ extern "C"
   * @return     None
   *
   * @details    This macro is used to set timer compared value to adjust timer time-out interval.
-  * @note       1. Never write 0x0 or 0x1 in this field, or the core will run into unknown state. \n
-  *             2. If update timer compared value in continuous counting mode, timer counter value will keep counting continuously. \n
-  *                But if timer is operating at other modes, the timer up counter will restart counting and start from 0.
+  * @note       Never write 0x0 or 0x1 in this field, or the core will run into unknown state. \n
+  *             If update timer compared value in continuous counting mode, timer counter value will keep counting continuously. \n
+  *             But if timer is operating at other modes, the timer up counter will restart counting and start from 0.
   */
 #define TIMER_SET_CMP_VALUE(timer, u32Value)        ((timer)->TCMPR = (u32Value))
 

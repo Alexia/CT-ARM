@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     sys.h
  * @version  V3.00
- * $Revision: 24 $
- * $Date: 14/12/03 10:03a $
+ * $Revision: 30 $
+ * $Date: 15/01/16 1:46p $
  * @brief    NUC131 Series SYS Driver Header File
  *
  * @note
@@ -361,12 +361,12 @@ Example: If user want to set PA.0 as ADC0 and PA.1 as ADC1 in initial function,
 #define SYS_ALT_MFP3_PA8_I2C0_SDA   NULL                /*!< No ALT_MFP3 setting for PA.8 */
 #define SYS_ALT_MFP4_PA8_I2C0_SDA   0x00000000UL        /*!< ALT_MFP4 PA.8 setting for I2C0_SDA */
 
-#define SYS_GPA_MFP_PA8_UART_nRTS    (1UL<<8)           /*!< GPA_MFP PA.8 setting for UART_nRTS */
-#define SYS_ALT_MFP_PA8_UART_nRTS   NULL                /*!< No ALT_MFP setting for PA.8 */
-#define SYS_ALT_MFP1_PA8_UART_nRTS  NULL                /*!< No ALT_MFP1 setting for PA.8 */
-#define SYS_ALT_MFP2_PA8_UART_nRTS  NULL                /*!< No ALT_MFP2 setting for PA.8 */
-#define SYS_ALT_MFP3_PA8_UART_nRTS  NULL                /*!< No ALT_MFP3 setting for PA.8 */
-#define SYS_ALT_MFP4_PA8_UART_nRTS  (1UL<<0)            /*!< ALT_MFP4 PA.8 setting for UART_nRTS */
+#define SYS_GPA_MFP_PA8_UART1_nRTS    (1UL<<8)          /*!< GPA_MFP PA.8 setting for UART1_nRTS */
+#define SYS_ALT_MFP_PA8_UART1_nRTS   NULL               /*!< No ALT_MFP setting for PA.8 */
+#define SYS_ALT_MFP1_PA8_UART1_nRTS  NULL               /*!< No ALT_MFP1 setting for PA.8 */
+#define SYS_ALT_MFP2_PA8_UART1_nRTS  NULL               /*!< No ALT_MFP2 setting for PA.8 */
+#define SYS_ALT_MFP3_PA8_UART1_nRTS  NULL               /*!< No ALT_MFP3 setting for PA.8 */
+#define SYS_ALT_MFP4_PA8_UART1_nRTS  (1UL<<0)           /*!< ALT_MFP4 PA.8 setting for UART1_nRTS */
 
 #define SYS_GPA_MFP_PA8_Msk         (1UL<<8)            /*!< GPA_MFP PA.8 mask */
 #define SYS_ALT_MFP_PA8_Msk         NULL                /*!< No ALT_MFP PA.8 mask */
@@ -674,7 +674,7 @@ Example: If user want to set PA.0 as ADC0 and PA.1 as ADC1 in initial function,
 #define SYS_ALT_MFP4_PB3_TM3_EXT     NULL               /*!< No ALT_MFP4 setting for PB.3 */
 
 #define SYS_GPB_MFP_PB3_PWM1_BRAKE0     (1UL<<3)        /*!< GPB_MFP PB.3 setting for PWM1_BRAKE0 */
-#define SYS_ALT_MFP_PB3_PWM1_BRAKE0     0000000UL       /*!< ALT_MFP PB.3 setting for PWM1_BRAKE0 */
+#define SYS_ALT_MFP_PB3_PWM1_BRAKE0     0x00000000UL    /*!< ALT_MFP PB.3 setting for PWM1_BRAKE0 */
 #define SYS_ALT_MFP1_PB3_PWM1_BRAKE0    NULL            /*!< No ALT_MFP1 setting for PB.3 */
 #define SYS_ALT_MFP2_PB3_PWM1_BRAKE0    0x00000000UL    /*!< ALT_MFP2 PB.3 setting for PWM1_BRAKE0 */
 #define SYS_ALT_MFP3_PB3_PWM1_BRAKE0    (1UL<<30)       /*!< ALT_MFP3 PB.3 setting for PWM1_BRAKE0 */
@@ -1549,7 +1549,7 @@ Example: If user want to set PA.0 as ADC0 and PA.1 as ADC1 in initial function,
 #define SYS_ALT_MFP_PF6_Msk         NULL                /*!< No ALT_MFP PF.6 mask */
 #define SYS_ALT_MFP1_PF6_Msk        NULL                /*!< No ALT_MFP1 PF.6 mask */
 #define SYS_ALT_MFP2_PF6_Msk        NULL                /*!< No ALT_MFP2 PF.6 mask */
-#define SYS_ALT_MFP3_PF6_Msk        NuLL                /*!< No ALT_MFP3 PF.6 mask */
+#define SYS_ALT_MFP3_PF6_Msk        NULL                /*!< No ALT_MFP3 PF.6 mask */
 #define SYS_ALT_MFP4_PF6_Msk        NULL                /*!< No ALT_MFP4 PF.6 mask */
 
 //PF.7
@@ -1571,7 +1571,7 @@ Example: If user want to set PA.0 as ADC0 and PA.1 as ADC1 in initial function,
 #define SYS_ALT_MFP_PF7_Msk         NULL                /*!< No ALT_MFP PF.7 mask */
 #define SYS_ALT_MFP1_PF7_Msk        NULL                /*!< No ALT_MFP1 PF.7 mask */
 #define SYS_ALT_MFP2_PF7_Msk        NULL                /*!< No ALT_MFP2 PF.7 mask */
-#define SYS_ALT_MFP3_PF7_Msk        NuLL                /*!< No ALT_MFP3 PF.7 mask */
+#define SYS_ALT_MFP3_PF7_Msk        NULL                /*!< No ALT_MFP3 PF.7 mask */
 #define SYS_ALT_MFP4_PF7_Msk        NULL                /*!< No ALT_MFP4 PF.7 mask */
 
 //PF.8
@@ -1724,6 +1724,15 @@ Example: If user want to set PA.0 as ADC0 and PA.1 as ADC1 in initial function,
 #define SYS_IS_CPU_RST()                (SYS->RSTSRC & SYS_RSTSRC_RSTS_CPU_Msk)
 
 /**
+  * @brief      Get reset source is from Low-Voltage-Reset
+  * @param      None
+  * @retval     0   Previous reset source is not from Low-Voltage-Reset
+  * @retval     >=1 Previous reset source is from Low-Voltage-Reset
+  * @details    This macro get previous reset source is from Low-Voltage-Reset.
+  */
+#define SYS_IS_LVR_RST()                (SYS->RSTSRC & SYS_RSTSRC_RSTS_LVR_Msk)
+
+/**
   * @brief      Get reset source is from Power-on Reset
   * @param      None
   * @retval     0   Previous reset source is not from Power-on Reset
@@ -1748,7 +1757,7 @@ Example: If user want to set PA.0 as ADC0 and PA.1 as ADC1 in initial function,
   * @retval     >=1 Previous reset source is from system reset
   * @details    This macro get previous reset source is from system reset.
   */
-#define SYS_IS_SYSTEM_RST()             (SYS->RSTSRC & SYS_RSTSRC_RSTS_MCU_Msk)
+#define SYS_IS_SYSTEM_RST()             (SYS->RSTSRC & SYS_RSTSRC_RSTS_SYS_Msk)
 
 /**
   * @brief      Get reset source is from window watch dog reset

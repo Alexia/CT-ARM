@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     I2C.h
  * @version  V3.0
- * $Revision: 6 $
- * $Date: 14/10/07 4:08p $
+ * $Revision: 7 $
+ * $Date: 15/01/16 1:56p $
  * @brief    NUC131 Series I2C Driver Header File
  *
  * @note
@@ -182,7 +182,6 @@ uint32_t I2C_Open(I2C_T *i2c, uint32_t u32BusClock);
 uint8_t I2C_GetData(I2C_T *i2c);
 void I2C_SetSlaveAddr(I2C_T *i2c, uint8_t u8SlaveNo, uint8_t u8SlaveAddr, uint8_t u8GCMode);
 void I2C_SetSlaveAddrMask(I2C_T *i2c, uint8_t u8SlaveNo, uint8_t u8SlaveAddrMask);
-uint32_t I2C_SetClockBusFreq(I2C_T *i2c, uint32_t u32BusClock);
 void I2C_EnableTimeout(I2C_T *i2c, uint8_t u8LongTimeout);
 void I2C_DisableTimeout(I2C_T *i2c);
 void I2C_EnableWakeup(I2C_T *i2c);

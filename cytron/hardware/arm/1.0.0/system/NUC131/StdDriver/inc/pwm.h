@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     pwm.h
  * @version  V3.00
- * $Revision: 8 $
- * $Date: 14/11/07 2:07p $
+ * $Revision: 9 $
+ * $Date: 14/12/30 1:59p $
  * @brief    NUC131 series PWM driver header file
  *
  * @note
@@ -257,12 +257,12 @@ extern "C"
  * @note This new setting will take effect on next PWM period.
  * \hideinitializer
  */
-#define PWM_SET_CMR(pwm, u32ChannelNum, u32CMR) (*(__IO uint32_t *) (&((pwm)->CMPDAT0) + (u32ChannelNum)) = (u32CMR))
+#define PWM_SET_CMR(pwm, u32ChannelNum, u32CMR) ((pwm)->CMPDAT[(u32ChannelNum)] = (u32CMR))
 
 /**
  * @brief This macro set the period of the selected channel
  * @param[in] pwm The pointer of the specified PWM module
- * @param[in] u32ChannelNum PWM channel number. Valid values are between 0~5. Every two channels share the same setting.
+ * @param[in] u32ChannelNum PWM channel number. Valid values are between 0, 2, 4. Every two channels share the same setting.
  * @param[in] u32CNR Period of specified channel. Valid values are between 0~0xFFFF
  * @return None
  * @details This macro is used to set the period of specified channel.
@@ -270,7 +270,7 @@ extern "C"
  * @note PWM counter will stop if period length set to 0.
  * \hideinitializer
  */
-#define PWM_SET_CNR(pwm, u32ChannelNum, u32CNR)  (*(__IO uint32_t *) (&((pwm)->PERIOD0) + (((u32ChannelNum) >> 1) << 1)) = (u32CNR))
+#define PWM_SET_CNR(pwm, u32ChannelNum, u32CNR)  ((pwm)->PERIOD[(((u32ChannelNum) >> 1) << 1)] = (u32CNR))
 
 /**
  * @brief This macro set the PWM aligned type

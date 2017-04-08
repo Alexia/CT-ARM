@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     clk.c
  * @version  V3.00
- * $Revision: 21 $
- * $Date: 14/11/26 9:29a $
+ * $Revision: 23 $
+ * $Date: 15/01/16 1:46p $
  * @brief    NUC131 series CLK driver source file
  *
  * @note
@@ -131,7 +131,7 @@ uint32_t CLK_GetHCLKFreq(void)
 
 /**
   * @brief      Get PCLK frequency
-  * @param      None  
+  * @param      None
   * @return     PCLK frequency
   * @details    This function get PCLK frequency. The frequency unit is Hz.
   */
@@ -166,9 +166,9 @@ uint32_t CLK_SetCoreClock(uint32_t u32Hclk)
 {
     uint32_t u32HIRCSTB;
 
-    /* Read HIRC clock source stable flag */    
-    u32HIRCSTB = CLK->CLKSTATUS & CLK_CLKSTATUS_OSC22M_STB_Msk;        
-    
+    /* Read HIRC clock source stable flag */
+    u32HIRCSTB = CLK->CLKSTATUS & CLK_CLKSTATUS_OSC22M_STB_Msk;
+
     /* The range of u32Hclk is 25 MHz ~ 50 MHz */
     if(u32Hclk > FREQ_50MHZ)
         u32Hclk = FREQ_50MHZ;
@@ -177,32 +177,32 @@ uint32_t CLK_SetCoreClock(uint32_t u32Hclk)
 
     /* Switch HCLK clock source to HIRC clock for safe */
     CLK->PWRCON |= CLK_PWRCON_OSC22M_EN_Msk;
-    CLK_WaitClockReady(CLK_CLKSTATUS_OSC22M_STB_Msk);  
+    CLK_WaitClockReady(CLK_CLKSTATUS_OSC22M_STB_Msk);
     CLK->CLKSEL0 |= CLK_CLKSEL0_HCLK_S_Msk;
-    CLK->CLKDIV &= (~CLK_CLKDIV_HCLK_N_Msk);  
+    CLK->CLKDIV &= (~CLK_CLKDIV_HCLK_N_Msk);
 
     /* Configure PLL setting if HXT clock is enabled */
     if(CLK->PWRCON & CLK_PWRCON_XTL12M_EN_Msk)
         u32Hclk = CLK_EnablePLL(CLK_PLLCON_PLL_SRC_HXT, (u32Hclk << 1));
 
-    /* Configure PLL setting if HXT clock is not enabled */    
+    /* Configure PLL setting if HXT clock is not enabled */
     else
     {
         u32Hclk = CLK_EnablePLL(CLK_PLLCON_PLL_SRC_HIRC, (u32Hclk << 1));
-        
-        /* Read HIRC clock source stable flag */    
-        u32HIRCSTB = CLK->CLKSTATUS & CLK_CLKSTATUS_OSC22M_STB_Msk;            
+
+        /* Read HIRC clock source stable flag */
+        u32HIRCSTB = CLK->CLKSTATUS & CLK_CLKSTATUS_OSC22M_STB_Msk;
     }
-    
+
     /* Select HCLK clock source to PLL,
        Select HCLK clock source divider as 2
        and update system core clock
     */
     CLK_SetHCLK(CLK_CLKSEL0_HCLK_S_PLL, CLK_CLKDIV_HCLK(2));
-    
+
     /* Disable HIRC if HIRC is disabled before setting core clock */
-    if( u32HIRCSTB == 0 )
-        CLK->PWRCON &= ~CLK_PWRCON_OSC22M_EN_Msk;        
+    if(u32HIRCSTB == 0)
+        CLK->PWRCON &= ~CLK_PWRCON_OSC22M_EN_Msk;
 
     /* Return actually HCLK frequency is PLL frequency divide 2 */
     return u32Hclk >> 1;
@@ -224,10 +224,10 @@ uint32_t CLK_SetCoreClock(uint32_t u32Hclk)
 void CLK_SetHCLK(uint32_t u32ClkSrc, uint32_t u32ClkDiv)
 {
     uint32_t u32HIRCSTB;
-    
-    /* Read HIRC clock source stable flag */    
-    u32HIRCSTB = CLK->CLKSTATUS & CLK_CLKSTATUS_OSC22M_STB_Msk;    
-    
+
+    /* Read HIRC clock source stable flag */
+    u32HIRCSTB = CLK->CLKSTATUS & CLK_CLKSTATUS_OSC22M_STB_Msk;
+
     /* Switch to HIRC for Safe. Avoid HCLK too high when applying new divider. */
     CLK->PWRCON |= CLK_PWRCON_OSC22M_EN_Msk;
     while((CLK->CLKSTATUS & CLK_CLKSTATUS_OSC22M_STB_Msk) == 0);
@@ -241,10 +241,10 @@ void CLK_SetHCLK(uint32_t u32ClkSrc, uint32_t u32ClkDiv)
 
     /* Update System Core Clock */
     SystemCoreClockUpdate();
-    
+
     /* Disable HIRC if HIRC is disabled before switching HCLK source */
-    if( u32HIRCSTB == 0 )
-        CLK->PWRCON &= ~CLK_CLKSTATUS_OSC22M_STB_Msk;             
+    if(u32HIRCSTB == 0)
+        CLK->PWRCON &= ~CLK_CLKSTATUS_OSC22M_STB_Msk;
 }
 
 /**
@@ -475,7 +475,7 @@ uint32_t CLK_EnablePLL(uint32_t u32PllClkSrc, uint32_t u32PllFreq)
     /* Disable PLL first to avoid unstable when setting PLL. */
     CLK->PLLCON = CLK_PLLCON_PD_Msk;
 
-    /* PLL source clock is from HXT */    
+    /* PLL source clock is from HXT */
     if(u32PllClkSrc == CLK_PLLCON_PLL_SRC_HXT)
     {
         /* Enable HXT clock */
@@ -491,10 +491,10 @@ uint32_t CLK_EnablePLL(uint32_t u32PllClkSrc, uint32_t u32PllFreq)
         /* u32NR start from 2 */
         u32NR = 2;
     }
-    
-    /* PLL source clock is from HIRC */    
+
+    /* PLL source clock is from HIRC */
     else
-    {       
+    {
         /* Enable HIRC clock */
         CLK->PWRCON |= CLK_PWRCON_OSC22M_EN_Msk;
 
@@ -506,7 +506,7 @@ uint32_t CLK_EnablePLL(uint32_t u32PllClkSrc, uint32_t u32PllFreq)
         u32PllSrcClk = __HIRC;
 
         /* u32NR start from 4 when FIN = 22.1184MHz to avoid calculation overflow */
-        u32NR = 4;                
+        u32NR = 4;
     }
 
     /* Select "NO" according to request frequency */
@@ -609,12 +609,7 @@ void CLK_DisablePLL(void)
   */
 uint32_t CLK_WaitClockReady(uint32_t u32ClkMask)
 {
-    int32_t i32TimeOutCnt;
-
-    /* Update System Core Clock */
-    SystemCoreClockUpdate();        
-    
-    i32TimeOutCnt = __HSI / 30; /* About 300ms */
+    int32_t i32TimeOutCnt = 1200000;
 
     while((CLK->CLKSTATUS & u32ClkMask) != u32ClkMask)
     {

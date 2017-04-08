@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     gpio.c
  * @version  V3.00
- * $Revision: 3 $
- * $Date: 14/06/24 8:50p $
+ * $Revision: 5 $
+ * $Date: 15/01/16 1:46p $
  * @brief    NUC131 series GPIO driver source file
  *
  * @note
@@ -27,11 +27,11 @@
  * @brief       Set GPIO operation mode
  *
  * @param[in]   port        GPIO port. It could be PA, PB, PC, PD, PE or PF.
- * @param[in]   u32PinMask  The single or multiple pins of specified GPIO port.
- *                          It could be BIT0 ~ BIT15 for PA and PB GPIO port.
- *                          It could be BIT0 ~ BIT3, BIT6 ~ BIT11, BIT14 and BIT15 for PC GPIO port.
- *                          It could be BIT6, BIT7, BIT14 and BIT15 for PD GPIO port.
- *                          It could be BIT5 for PE GPIO port.
+ * @param[in]   u32PinMask  The single or multiple pins of specified GPIO port. \n
+ *                          It could be BIT0 ~ BIT15 for PA and PB GPIO port. \n
+ *                          It could be BIT0 ~ BIT3, BIT6 ~ BIT11, BIT14 and BIT15 for PC GPIO port. \n
+ *                          It could be BIT6, BIT7, BIT14 and BIT15 for PD GPIO port. \n
+ *                          It could be BIT5 for PE GPIO port. \n
  *                          It could be BIT0, BIT1 and BIT4 ~ BIT8 for PF GPIO port.
  * @param[in]   u32Mode     Operation mode. It could be \n
  *                          GPIO_PMD_INPUT, GPIO_PMD_OUTPUT, GPIO_PMD_OPEN_DRAIN, GPIO_PMD_QUASI.
@@ -57,12 +57,12 @@ void GPIO_SetMode(GPIO_T *port, uint32_t u32PinMask, uint32_t u32Mode)
  * @brief       Enable GPIO interrupt
  *
  * @param[in]   port            GPIO port. It could be PA, PB, PC, PD, PE or PF.
- * @param[in]   u32Pin          The pin of specified GPIO port.
- *                              It could be 0 ~ 15 for PA and PB GPIO port.
- *                              It could be 0 ~ 3, 6 ~ 11, BIT14 and BIT15 for PC GPIO port.
- *                              It could be 6, 7, 14 and BIT15 for PD GPIO port.
- *                              It could be 5 for PE GPIO port.
- *                              It could be 0, 1 and 4 ~ 8 for PF GPIO port.
+ * @param[in]   u32Pin          The pin of specified GPIO port. \n
+ *                              It could be 0 ~ 15 for PA and PB GPIO port. \n
+ *                              It could be 0 ~ 3, 6 ~ 11, BIT14 and BIT15 for PC GPIO port. \n
+ *                              It could be 6, 7, 14 and BIT15 for PD GPIO port. \n
+ *                              It could be 5 for PE GPIO port. \n
+ *                              It could be 0, 1 and 4 ~ 8 for PF GPIO port. \n
  * @param[in]   u32IntAttribs   The interrupt attribute of specified GPIO pin. It could be \n
  *                              GPIO_INT_RISING, GPIO_INT_FALLING, GPIO_INT_BOTH_EDGE, GPIO_INT_HIGH, GPIO_INT_LOW.
  *
@@ -81,12 +81,12 @@ void GPIO_EnableInt(GPIO_T *port, uint32_t u32Pin, uint32_t u32IntAttribs)
  * @brief       Disable GPIO interrupt
  *
  * @param[in]   port      GPIO port. It could be PA, PB, PC, PD, PE or PF.
- * @param[in]   u32Pin    The pin of specified GPIO port.
- *                        It could be 0 ~ 15 for PA and PB GPIO port.
- *                        It could be 0 ~ 3, 6 ~ 11, BIT14 and BIT15 for PC GPIO port.
- *                        It could be 6, 7, 14 and BIT15 for PD GPIO port.
- *                        It could be 5 for PE GPIO port.
- *                        It could be 0, 1 and 4 ~ 8 for PF GPIO port.
+ * @param[in]   u32Pin    The pin of specified GPIO port. \n
+ *                        It could be 0 ~ 15 for PA and PB GPIO port. \n
+ *                        It could be 0 ~ 3, 6 ~ 11, BIT14 and BIT15 for PC GPIO port. \n
+ *                        It could be 6, 7, 14 and BIT15 for PD GPIO port. \n
+ *                        It could be 5 for PE GPIO port. \n
+ *                        It could be 0, 1 and 4 ~ 8 for PF GPIO port. \n
  *
  * @return      None
  *

@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     pwm.c
  * @version  V1.00
- * $Revision: 9 $
- * $Date: 14/12/01 10:35a $
+ * $Revision: 12 $
+ * $Date: 15/01/16 1:46p $
  * @brief    NUC131 series PWM driver source file
  *
  * @note
@@ -77,8 +77,8 @@ uint32_t PWM_ConfigCaptureChannel(PWM_T *pwm, uint32_t u32ChannelNum, uint32_t u
     // every two channels share a prescaler
     PWM_SET_PRESCALER(pwm, u32ChannelNum, --u16Prescale);
 
-    // set PWM to down count type(edge aligned)    
-		(pwm)->CTL1 = ((pwm)->CTL1 & ~(PWM_CTL1_CNTTYPE0_Msk << ((u32ChannelNum >> 1) << 2))) | (1UL << ((u32ChannelNum >> 1) << 2));
+    // set PWM to down count type(edge aligned)
+    (pwm)->CTL1 = ((pwm)->CTL1 & ~(PWM_CTL1_CNTTYPE0_Msk << ((u32ChannelNum >> 1) << 2))) | (1UL << ((u32ChannelNum >> 1) << 2));
 
     PWM_SET_CNR(pwm, u32ChannelNum, u16CNR);
 
@@ -141,7 +141,7 @@ uint32_t PWM_ConfigOutputChannel(PWM_T *pwm, uint32_t u32ChannelNum, uint32_t u3
     (pwm)->CTL1 = ((pwm)->CTL1 & ~(PWM_CTL1_CNTTYPE0_Msk << ((u32ChannelNum >> 1) << 2))) | (1UL << ((u32ChannelNum >> 1) << 2));
 
     PWM_SET_CNR(pwm, u32ChannelNum, --u16CNR);
-    if (u32DutyCycle)
+    if(u32DutyCycle)
     {
         PWM_SET_CMR(pwm, u32ChannelNum, u32DutyCycle * (u16CNR + 1) / 100 - 1);
         (pwm)->WGCTL0 &= ~((PWM_WGCTL0_PRDPCTL0_Msk | PWM_WGCTL0_ZPCTL0_Msk) << (u32ChannelNum * 2));
@@ -200,7 +200,7 @@ void PWM_Stop(PWM_T *pwm, uint32_t u32ChannelMask)
     {
         if(u32ChannelMask & (1 << i))
         {
-            *(__IO uint32_t *)(&((pwm)->PERIOD0) + ((i >> 1) << 1)) = 0;
+            (pwm)->PERIOD[((i >> 1) << 1)] = 0;
         }
     }
 }

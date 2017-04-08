@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     bpwm.c
  * @version  V1.00
- * $Revision: 6 $
- * $Date: 14/12/01 10:35a $
+ * $Revision: 7 $
+ * $Date: 15/01/16 1:46p $
  * @brief    NUC131 series BPWM driver source file
  *
  * @note
@@ -141,7 +141,7 @@ uint32_t BPWM_ConfigOutputChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t
     (bpwm)->CTL1 = (1UL);
 
     BPWM_SET_CNR(bpwm, u32ChannelNum, --u16CNR);
-    if (u32DutyCycle)
+    if(u32DutyCycle)
     {
         BPWM_SET_CMR(bpwm, u32ChannelNum, u32DutyCycle * (u16CNR + 1) / 100 - 1);
         (bpwm)->WGCTL0 &= ~((BPWM_WGCTL0_PRDPCTL0_Msk | BPWM_WGCTL0_ZPCTL0_Msk) << (u32ChannelNum * 2));

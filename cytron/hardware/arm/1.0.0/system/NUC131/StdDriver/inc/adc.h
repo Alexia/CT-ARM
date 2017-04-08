@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     adc.h
  * @version  V3.00
- * $Revision: 4 $
- * $Date: 14/07/22 6:08p $
+ * $Revision: 5 $
+ * $Date: 15/01/16 1:45p $
  * @brief    NUC131 Series ADC Driver Header File
  *
  * @note
@@ -230,7 +230,7 @@ extern "C"
                         u32ChNum, \
                         u32Condition, \
                         u32Data, \
-                        u32MatchCount) (adc->ADCMPR[0] = ((u32ChNum) << ADC_ADCMPR_CMPCH_Pos) | \
+                        u32MatchCount) ((adc)->ADCMPR[0] = ((u32ChNum) << ADC_ADCMPR_CMPCH_Pos) | \
                                                           (u32Condition) | \
                                                          ((u32Data) << ADC_ADCMPR_CMPD_Pos) | \
                                                          (((u32MatchCount) - 1) << ADC_ADCMPR_CMPMATCNT_Pos) |\
@@ -263,7 +263,7 @@ extern "C"
                         u32ChNum, \
                         u32Condition, \
                         u32Data, \
-                        u32MatchCount) (adc->ADCMPR[1] = ((u32ChNum) << ADC_ADCMPR_CMPCH_Pos) | \
+                        u32MatchCount) ((adc)->ADCMPR[1] = ((u32ChNum) << ADC_ADCMPR_CMPCH_Pos) | \
                                                           (u32Condition) | \
                                                          ((u32Data) << ADC_ADCMPR_CMPD_Pos) | \
                                                          (((u32MatchCount) - 1) << ADC_ADCMPR_CMPMATCNT_Pos) |\
@@ -297,7 +297,7 @@ extern "C"
   * @return None
   * @details  The macro is used to set A/D differential input mode output format.
   */
-#define ADC_SET_DMOF(adc, u32Format) (adc->ADCR = ((adc)->ADCR & ~ADC_ADCR_DMOF_Msk) | (u32Format))
+#define ADC_SET_DMOF(adc, u32Format) ((adc)->ADCR = ((adc)->ADCR & ~ADC_ADCR_DMOF_Msk) | (u32Format))
 
 /**
   * @brief Start the A/D conversion.

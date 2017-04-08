@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     spi.h
  * @version  V3.0
- * $Revision: 6 $
- * $Date: 14/10/09 1:17p $
+ * $Revision: 7 $
+ * $Date: 14/12/24 2:37p $
  * @brief    NUC131 Series SPI Driver Header File
  *
  * @note
@@ -260,7 +260,7 @@ extern "C"
   * @return     None.
   * @details    If FIFO mode is disabled, user can use this macro to trigger the data transfer after all configuration is ready.
   *             If FIFO mode is enabled, user should not use this macro to trigger the data transfer. SPI controller will trigger the data transfer
-  *             automatically after user write to SPI_TX0/1 register.
+  *             automatically after user write to SPI_TX register.
   */
 #define SPI_TRIGGER(spi)   ((spi)->CNTRL |= SPI_CNTRL_GO_BUSY_Msk)
 
@@ -293,9 +293,6 @@ uint32_t SPI_GetStatus(SPI_T *spi, uint32_t u32Mask);
   * @} End of NUC131 Function Interface
   */
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif
 

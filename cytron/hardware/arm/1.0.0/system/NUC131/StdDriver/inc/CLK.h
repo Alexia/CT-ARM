@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     clk.h
  * @version  V3.0
- * $Revision: 12 $
- * $Date: 14/11/10 10:34a $
+ * $Revision: 13 $
+ * $Date: 15/01/15 10:56a $
  * @brief    NUC131 Series Clock Control Driver Header File
  *
  * @note
@@ -52,7 +52,6 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /*  CLKSEL1 constant definitions.                                                                          */
 /*---------------------------------------------------------------------------------------------------------*/
-#define CLK_CLKSEL1_WDT_S_LXT           (0x1UL<<CLK_CLKSEL1_WDT_S_Pos)    /*!< Setting WDT clock source as external X'tal 32.768KHz*/
 #define CLK_CLKSEL1_WDT_S_HCLK_DIV2048  (0x2UL<<CLK_CLKSEL1_WDT_S_Pos)    /*!< Setting WDT clock source as HCLK/2048 */
 #define CLK_CLKSEL1_WDT_S_LIRC          (0x3UL<<CLK_CLKSEL1_WDT_S_Pos)    /*!< Setting WDT clock source as internal 10KHz RC clock */
 
@@ -167,8 +166,8 @@ extern "C"
 #define MODULE_CLKDIV_Msk(x)    (((x) >>10) & 0xff)   /*!< Calculate CLKDIV mask offset on MODULE index */
 #define MODULE_CLKDIV_Pos(x)    (((x) >>5 ) & 0x1f)   /*!< Calculate CLKDIV position offset on MODULE index */
 #define MODULE_IP_EN_Pos(x)     (((x) >>0 ) & 0x1f)   /*!< Calculate APBCLK offset on MODULE index */
-#define MODULE_NoMsk            0x0                 	/*!< Not mask on MODULE index */
-#define NA                      MODULE_NoMsk        	/*!< Not Available */
+#define MODULE_NoMsk            0x0                 /*!< Not mask on MODULE index */
+#define NA                      MODULE_NoMsk        /*!< Not Available */
 
 #define MODULE_APBCLK_ENC(x)        (((x) & 0x03) << 30)   /*!< MODULE index, 0x0:AHBCLK, 0x1:APBCLK, 0x2:APBCLK1 */
 #define MODULE_CLKSEL_ENC(x)        (((x) & 0x03) << 28)   /*!< CLKSEL offset on MODULE index, 0x0:CLKSEL0, 0x1:CLKSEL1, 0x2:CLKSEL2, 0x3:CLKSEL3 */
@@ -363,9 +362,7 @@ uint32_t CLK_WaitClockReady(uint32_t u32ClkMask);
 
 /*@}*/ /* end of group NUC131_Device_Driver */
 
-#ifdef __cplusplus
-}
-#endif
+
 
 #endif //__CLK_H__
 

@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     uart.c
  * @version  V3.00
- * $Revision: 14 $
- * $Date: 14/11/07 11:18a $
+ * $Revision: 15 $
+ * $Date: 15/01/16 1:46p $
  * @brief    NUC131 series UART driver source file
  *
  * @note
@@ -421,7 +421,7 @@ void UART_SelectIrDAMode(UART_T* uart, uint32_t u32Buadrate, uint32_t u32Directi
     else
     {
         uart->IRCR &= ~UART_IRCR_INV_TX_Msk;    //Tx signal is not inverse
-        uart->IRCR |= UART_IRCR_TX_SELECT_Msk;        
+        uart->IRCR |= UART_IRCR_TX_SELECT_Msk;
     }
 }
 

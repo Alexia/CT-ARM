@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     bpwm.h
  * @version  V1.00
- * $Revision: 4 $
- * $Date: 14/11/07 2:06p $
+ * $Revision: 5 $
+ * $Date: 14/12/30 1:58p $
  * @brief    NUC131 series PWM driver header file
  *
  * @note
@@ -184,7 +184,7 @@ extern "C"
  * @note This new setting will take effect on next BPWM period
  * \hideinitializer
  */
-#define BPWM_SET_CMR(bpwm, u32ChannelNum, u32CMR) (*(__IO uint32_t *) (&((bpwm)->CMPDAT0) + (u32ChannelNum)) = (u32CMR))
+#define BPWM_SET_CMR(bpwm, u32ChannelNum, u32CMR) ((bpwm)->CMPDAT[(u32ChannelNum)] = (u32CMR))
 
 /**
  * @brief This macro set the period of all channels

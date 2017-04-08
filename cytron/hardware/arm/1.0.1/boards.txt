@@ -1,6 +1,6 @@
 menu.UpdateDataType = Upload To
 
-nuvoton_nuc131.name = CT-ARM 
+nuvoton_nuc131.name = CT-ARM-1.0.1
 nuvoton_nuc131.upload.tool = nulinkburn
 nuvoton_nuc131.upload.protocol = nuc-ba
 nuvoton_nuc131.upload.maximum_size = 65536
